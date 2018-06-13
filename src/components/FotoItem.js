@@ -31,7 +31,7 @@ class FotoInfo extends Component {
             <div className="foto-in fo">
                 <div className="foto-info-likes">
                     {
-                        likers.map(liker => <a href="#">{liker.login}, </a>)
+                        likers.map(liker => <a href="#" key={liker.login} >{liker.login}, </a>)
                     }
 
                     curtiram
@@ -46,7 +46,7 @@ class FotoInfo extends Component {
                     {
                         comentarios.map(comentario => {
                             return (
-                                <li className="comentario">
+                                <li className="comentario" key={comentario.id}>
                                     <a className="foto-info-autor">{comentario.login} </a>
                                     {comentario.texto}
                                 </li>

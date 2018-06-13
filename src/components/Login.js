@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
+import { browserHistory } from 'react-router';
+
+export const TOKEN_KEY = 'auth-token';
 
 export default class Login extends Component {
 
-    constructor() {
-        super();
+    constructor(props) {
+        super(props);
 
         this.state = {
-            mensagem : ''
+            mensagem : this.props.location.query.mensagem
         };
 
         this.envia = this.envia.bind(this);
@@ -32,9 +35,13 @@ export default class Login extends Component {
                     return responde.text();
                 }
 
-                this.setState({ mensagem : 'Não foi possível fazer o login' });
+                throw new Error('Não foi possível fazer o login');
             })
-            .then(token => console.log(token));
+            .then(token => {
+                localStorage.setItem(TOKEN_KEY, token);
+                browserHistory.push('/timeline');
+            })
+            .catch(error => this.setState({ mensagem : error.message }));
     }
 
     render() {
