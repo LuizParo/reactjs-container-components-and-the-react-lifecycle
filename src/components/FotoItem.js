@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router';
 
 class FotoHeader extends Component {
 
@@ -10,9 +11,9 @@ class FotoHeader extends Component {
                 <figure className="foto-usuario">
                     <img src={urlPerfil} alt="foto do usuario"/>
                     <figcaption className="foto-usuario">
-                        <a href="#">
+                        <Link to={`/timeline/${loginUsuario}`}>
                             {loginUsuario}
-                        </a>  
+                        </Link>  
                     </figcaption>
                 </figure>
 
@@ -31,7 +32,7 @@ class FotoInfo extends Component {
             <div className="foto-in fo">
                 <div className="foto-info-likes">
                     {
-                        likers.map(liker => <a href="#" key={liker.login} >{liker.login}, </a>)
+                        likers.map(liker => <Link to={`/timeline/${liker.login}`} key={liker.login} >{liker.login}, </Link>)
                     }
 
                     curtiram
@@ -47,7 +48,7 @@ class FotoInfo extends Component {
                         comentarios.map(comentario => {
                             return (
                                 <li className="comentario" key={comentario.id}>
-                                    <a className="foto-info-autor">{comentario.login} </a>
+                                    <Link to={`/timeline/${comentario.login}`} className="foto-info-autor">{comentario.login} </Link>
                                     {comentario.texto}
                                 </li>
                             );
@@ -64,7 +65,7 @@ class FotoAtualizacoes extends Component {
     render() {
         return (
             <section className="fotoAtualizacoes">
-                <a href="#" className="fotoAtualizacoes-like">Likar</a>
+                <Link className="fotoAtualizacoes-like">Likar</Link>
                 <form className="fotoAtualizacoes-form">
                     <input type="text" placeholder="Adicione um comentário..." className="fotoAtualizacoes-form-campo"/>
                     <input type="submit" value="Comentar!" className="fotoAtualizacoes-form-submit"/>
